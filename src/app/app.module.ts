@@ -2,15 +2,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { MapComponent } from './map/map.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import {HttpClientModule} from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkerService} from './services/marker.service';
+import {PopUpService} from './services/pop-up.service';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    LeafletModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    GoogleChartsModule
   ],
-  providers: [],
+  providers: [
+    MarkerService,
+    PopUpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

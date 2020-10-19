@@ -1,0 +1,8 @@
+@import "~leaflet/dist/leaflet.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url('https://fonts.googleapis.com/css2?family=Material+Icons');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css');
+
+.heading {
+  background: rgba(108, 117, 125, .0627451);
+}
