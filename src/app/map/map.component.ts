@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import {MarkerService} from '../services/marker.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Data} from './data/data';
+import {ShapeService} from '../services/shape.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -28,9 +29,13 @@ export class MapComponent implements AfterViewInit {
 
   private map;
 
+  private countries;
+
   informationCovid = [];
 
-  constructor(private markerService: MarkerService, private httpClient: HttpClient) {
+  constructor(private markerService: MarkerService,
+              private httpClient: HttpClient,
+              private shapeService: ShapeService) {
   }
 
   ngAfterViewInit(): void {
@@ -47,11 +52,14 @@ export class MapComponent implements AfterViewInit {
     };
 
     this.httpClient.get<any>('https://coronavirus-19-api.herokuapp.com/countries', optionRequete).subscribe((data: Data[]) => {
-      console.log(data);
       this.informationCovid = data;
       this.informationCovid.shift();
 
       this.markerService.makeCapitalMarkers(this.map, this.informationCovid);
+      this.shapeService.getCountriesShapes().subscribe(countries => {
+        this.countries = countries;
+        this.initCountriesLayer();
+      });
     });
 
   }
@@ -68,6 +76,40 @@ export class MapComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
+  }
+
+  private initCountriesLayer(): void {
+
+    for (const country of this.countries.features){
+      let colorToFill = '#FFFFFF';
+
+      for (const data of this.informationCovid){
+        if (data.country === country.properties.ADMIN){
+          if (data.active < 10000){
+            colorToFill = '#6DB65B';
+          } else if (data.active >= 10000 && data.active < 50000) {
+            colorToFill = '#EBBD34';
+          } else {
+            colorToFill = '#D13028';
+          }
+
+          const countriesLayer = L.geoJSON(country, {
+            style: (feature) => ({
+              weight: 3,
+              opacity: 0.5,
+              color: '#008f68',
+              fillOpacity: 0.5,
+              fillColor: colorToFill
+            })
+          });
+
+          this.map.addLayer(countriesLayer);
+        }
+      }
+    }
+
+
+
   }
 
 }

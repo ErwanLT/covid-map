@@ -9,6 +9,7 @@ import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkerService} from './services/marker.service';
 import {PopUpService} from './services/pop-up.service';
+import {ShapeService} from './services/shape.service';
 import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
   ],
   providers: [
     MarkerService,
-    PopUpService
+    PopUpService,
+    ShapeService
   ],
   bootstrap: [AppComponent]
 })

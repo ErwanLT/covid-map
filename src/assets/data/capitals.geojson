@@ -717,7 +717,7 @@
     },
     {
       "properties": {
-        "country": "United Kingdom",
+        "country": "UK",
         "city": "London",
         "tld": "uk",
         "iso3": "GBR",
@@ -1766,7 +1766,7 @@
     },
     {
       "properties": {
-        "country": "Macedonia",
+        "country": "North Macedonia",
         "city": "Skopje",
         "tld": "mk",
         "iso3": "MKD",
@@ -2496,7 +2496,7 @@
     },
     {
       "properties": {
-        "country": "Congo Republic",
+        "country": "Congo",
         "city": "Brazzaville",
         "tld": "cg",
         "iso3": "COG",
@@ -2513,7 +2513,7 @@
     },
     {
       "properties": {
-        "country": "Central African Republic",
+        "country": "CAR",
         "city": "Bangui",
         "tld": "cf",
         "iso3": "CAF",
@@ -2530,7 +2530,7 @@
     },
     {
       "properties": {
-        "country": "Congo Democratic Republic",
+        "country": "DRC",
         "city": "Kinshasa",
         "tld": "cd",
         "iso3": "COD",
@@ -2547,7 +2547,7 @@
     },
     {
       "properties": {
-        "country": "Czech Republic",
+        "country": "Czechia",
         "city": "Prague",
         "tld": "cz",
         "iso3": "CZE",
@@ -2836,7 +2836,7 @@
     },
     {
       "properties": {
-        "country": "South Korea",
+        "country": "S. Korea",
         "city": "Seoul",
         "tld": "kr",
         "iso3": "KOR",
@@ -3635,7 +3635,7 @@
     },
     {
       "properties": {
-        "country": "United Arab Emirates",
+        "country": "UAE",
         "city": "Abu Dhabi",
         "tld": "ae",
         "iso3": "ARE",
