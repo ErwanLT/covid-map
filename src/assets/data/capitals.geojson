@@ -2836,7 +2836,7 @@
     },
     {
       "properties": {
-        "country": "Korea South",
+        "country": "South Korea",
         "city": "Seoul",
         "tld": "kr",
         "iso3": "KOR",
@@ -2870,7 +2870,7 @@
     },
     {
       "properties": {
-        "country": "Korea North",
+        "country": "North Korea",
         "city": "Pyongyang",
         "tld": "kp",
         "iso3": "PRK",
@@ -3193,7 +3193,7 @@
     },
     {
       "properties": {
-        "country": "United States",
+        "country": "USA",
         "city": "Washington, DC",
         "tld": "us",
         "iso3": "USA",

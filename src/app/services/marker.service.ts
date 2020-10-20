@@ -27,7 +27,8 @@ export class MarkerService {
 
         for (const d of information){
           if (d.country === c.properties.country){
-            c.activeCase = d.cases;
+            c.activeCase = d.active;
+            c.totalCase = d.cases;
             c.deaths = d.deaths;
             c.recovered = d.recovered;
           }
