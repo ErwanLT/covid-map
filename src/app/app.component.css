@@ -6,3 +6,7 @@
 .heading {
   background: rgba(108, 117, 125, .0627451);
 }
+
+.version {
+  font-size: 50%;
+}
