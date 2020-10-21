@@ -101,10 +101,18 @@ export class MapComponent implements AfterViewInit {
           if (data.country === country.properties.ADMIN){
             if (data.pourcentage < 0.2){
               colorToFill = '#6DB65B';
-            } else if (data.pourcentage >= 0.2 && data.pourcentage < 1) {
+            } else if (data.pourcentage >= 0.2 && data.pourcentage < 0.4) {
+              colorToFill = '#206b0b';
+            } else if (data.pourcentage >= 0.4 && data.pourcentage < 0.6){
               colorToFill = '#EBBD34';
-            } else {
+            } else if (data.pourcentage >= 0.6 && data.pourcentage < 0.8){
+              colorToFill = '#b77c36';
+            } else if (data.pourcentage >= 0.8 && data.pourcentage < 1){
+              colorToFill = '#eb6e34';
+            } else if (data.pourcentage > 1 && data.pourcentage < 2){
               colorToFill = '#D13028';
+            } else {
+              colorToFill = '#700404';
             }
 
             const countrieLayer = L.geoJSON(country, {
