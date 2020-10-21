@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, Input} from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
 import * as L from 'leaflet';
 import {MarkerService} from '../services/marker.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
@@ -30,6 +30,8 @@ export class MapComponent implements AfterViewInit {
   private map;
 
   private countries;
+
+  private population;
 
   informationCovid = [];
 
@@ -80,34 +82,54 @@ export class MapComponent implements AfterViewInit {
 
   private initCountriesLayer(): void {
 
-    for (const country of this.countries.features){
-      let colorToFill = '#FFFFFF';
-
-      for (const data of this.informationCovid){
-        if (data.country === country.properties.ADMIN){
-          if (data.active < 10000){
-            colorToFill = '#6DB65B';
-          } else if (data.active >= 10000 && data.active < 50000) {
-            colorToFill = '#EBBD34';
-          } else {
-            colorToFill = '#D13028';
+    this.httpClient.get('/assets/data/population.json').subscribe(population => {
+      this.population = population;
+      for (const pop of this.population) {
+        for (const info of this.informationCovid) {
+          if (info.country === pop.country) {
+            const percentage = (info.active / pop.population) * 100;
+            info.pourcentage = percentage || 0;
           }
-
-          const countriesLayer = L.geoJSON(country, {
-            style: (feature) => ({
-              weight: 3,
-              opacity: 0.5,
-              color: '#008f68',
-              fillOpacity: 0.5,
-              fillColor: colorToFill
-            })
-          });
-
-          this.map.addLayer(countriesLayer);
         }
       }
-    }
+      const layerGroup = [];
 
+      for (const country of this.countries.features){
+        let colorToFill = '#FFFFFF';
+
+        for (const data of this.informationCovid){
+          if (data.country === country.properties.ADMIN){
+            if (data.pourcentage < 0.2){
+              colorToFill = '#6DB65B';
+            } else if (data.pourcentage >= 0.2 && data.pourcentage < 1) {
+              colorToFill = '#EBBD34';
+            } else {
+              colorToFill = '#D13028';
+            }
+
+            const countrieLayer = L.geoJSON(country, {
+              style: (feature) => ({
+                weight: 3,
+                opacity: 0.5,
+                color: '#008f68',
+                fillOpacity: 0.5,
+                fillColor: colorToFill
+              })
+            });
+
+            layerGroup.push(countrieLayer);
+          }
+        }
+      }
+
+      const countries = L.layerGroup(layerGroup);
+
+      const overlayMaps = {
+        'Taux de contamination': countries
+      };
+
+      L.control.layers(this.map.title, overlayMaps).addTo(this.map);
+    });
 
 
   }
